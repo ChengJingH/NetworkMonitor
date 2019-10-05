@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vu-bz-vEc">
+                                <rect key="frame" x="20" y="241" width="374" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.67843137249999996" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="gI6-LP-iwB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KW2-nE-aMH">
+                                <rect key="frame" x="20" y="331" width="374" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.67843137249999996" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="en9-aG-Dcr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3vu-bz-vEc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7Fc-HP-wfi"/>
+                            <constraint firstItem="KW2-nE-aMH" firstAttribute="top" secondItem="3vu-bz-vEc" secondAttribute="bottom" constant="60" id="J8D-dR-p7j"/>
+                            <constraint firstItem="KW2-nE-aMH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gU8-mO-XrO"/>
+                            <constraint firstItem="3vu-bz-vEc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gUi-jl-ycI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KW2-nE-aMH" secondAttribute="trailing" constant="20" id="hYw-iT-gFt"/>
+                            <constraint firstItem="3vu-bz-vEc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="197" id="n44-0b-iW1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3vu-bz-vEc" secondAttribute="trailing" constant="20" id="vKK-UW-tm8"/>
+                            <constraint firstItem="KW2-nE-aMH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="zYU-BC-gbJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="i_speed" destination="3vu-bz-vEc" id="gf9-BP-32V"/>
+                        <outlet property="o_speed" destination="KW2-nE-aMH" id="EEd-op-3Gz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="136.60714285714286"/>
+        </scene>
+    </scenes>
+</document>
