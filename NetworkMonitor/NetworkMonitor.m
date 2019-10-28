@@ -199,42 +199,11 @@
     nw_path_monitor_start(path_monitor_t);
 }
 
-#pragma mark - PID
+#pragma mark - 进程 PID
 - (NSInteger)getPID
 {
     pid_t access_pid = getpid();
     return access_pid;
 }
-
-#pragma mark - 文件大小
-- (NSString *)cacheFilePath
-{
-    return NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
-}
-
-- (void)cacheSize
-{
-    NSLog(@"cache path ~ %@",[self cacheFilePath]);
-
-    //缓存大小
-    __block long long totalCacheSize = 0;
-
-    __block NSError *error;
-    NSFileManager *file = [NSFileManager defaultManager];
-    if ([file fileExistsAtPath:[self cacheFilePath]]) {
-        //该目录下所有路径
-        NSArray *fileArray = [file subpathsOfDirectoryAtPath:[self cacheFilePath] error:&error];
-        [fileArray enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSDictionary *fileDict = [file attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@",[self cacheFilePath], obj] error:&error];
-            if (!error) {
-                totalCacheSize += [fileDict fileSize];
-                NSLog(@"路径 ~ %@,大小 ~ %lld",obj, [fileDict fileSize]);
-            }
-        }];
-    }else{
-        NSLog(@"no cache");
-    }
-}
-
 
 @end

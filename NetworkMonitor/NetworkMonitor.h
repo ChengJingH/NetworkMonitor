@@ -21,9 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 网络类型监听
 - (void)networkTypeMonitor:(void(^)(NSString *networkType))networkTypeBlock;
 
-/// 获取文件大小
-- (void)cacheSize;
-
 @end
 
 NS_ASSUME_NONNULL_END
