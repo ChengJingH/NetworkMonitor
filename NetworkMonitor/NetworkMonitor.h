@@ -15,13 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 创建实例化对象
 + (instancetype)shareInstance;
 
-
 /// 网速监听
 - (void)networkMonitorSpeed:(void(^)(NSString *inStream, NSString *outStream))scheduleBlock;
 
-
 /// 网络类型监听
 - (void)networkTypeMonitor:(void(^)(NSString *networkType))networkTypeBlock;
+
+/// 获取文件大小
+- (void)cacheSize;
 
 @end
 

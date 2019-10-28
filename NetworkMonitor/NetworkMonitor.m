@@ -17,6 +17,9 @@
 #include <errno.h>
 #include <ifaddrs.h>
 
+/// CPU
+#import <mach/mach.h>
+#import <assert.h>
 
 @interface NetworkMonitor ()
 
@@ -35,7 +38,6 @@
     });
     return share;
 }
-
 
 - (void)networkMonitorSpeed:(void(^)(NSString *inStream, NSString *outStream))scheduleBlock
 {
@@ -74,7 +76,7 @@
         }
         freeifaddrs(ifList);
         
-        NSLog(@"iBytes ~ %u oBytes ~ %u",iBytes,oBytes);
+//        NSLog(@"iBytes ~ %u oBytes ~ %u",iBytes,oBytes);
     
         dispatch_sync(dispatch_get_main_queue(), ^{
             NSString *inStream = [weakSelf formatNetworkSpeed:iBytes - i_vel];
@@ -84,7 +86,6 @@
         
         i_vel = iBytes;
         o_vel = oBytes;
-
     });
     dispatch_resume(_timer);
 }
@@ -196,6 +197,43 @@
     
     //开始监控
     nw_path_monitor_start(path_monitor_t);
+}
+
+#pragma mark - PID
+- (NSInteger)getPID
+{
+    pid_t access_pid = getpid();
+    return access_pid;
+}
+
+#pragma mark - 文件大小
+- (NSString *)cacheFilePath
+{
+    return NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+}
+
+- (void)cacheSize
+{
+    NSLog(@"cache path ~ %@",[self cacheFilePath]);
+
+    //缓存大小
+    __block long long totalCacheSize = 0;
+
+    __block NSError *error;
+    NSFileManager *file = [NSFileManager defaultManager];
+    if ([file fileExistsAtPath:[self cacheFilePath]]) {
+        //该目录下所有路径
+        NSArray *fileArray = [file subpathsOfDirectoryAtPath:[self cacheFilePath] error:&error];
+        [fileArray enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *fileDict = [file attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@",[self cacheFilePath], obj] error:&error];
+            if (!error) {
+                totalCacheSize += [fileDict fileSize];
+                NSLog(@"路径 ~ %@,大小 ~ %lld",obj, [fileDict fileSize]);
+            }
+        }];
+    }else{
+        NSLog(@"no cache");
+    }
 }
 
 

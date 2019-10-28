@@ -39,6 +39,8 @@
         weakSelf.o_speed.text = [NSString stringWithFormat:@"上传速度：%@",outStream];
     }];
     
+    //缓存大小
+    [[NetworkMonitor shareInstance] cacheSize];
 }
 
 
