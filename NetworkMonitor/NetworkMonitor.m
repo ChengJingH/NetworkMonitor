@@ -39,11 +39,21 @@
     return share;
 }
 
-- (void)networkMonitorSpeed:(void(^)(NSString *inStream, NSString *outStream))scheduleBlock
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.dataSource = [[NSMutableDictionary alloc] init];
+        self.countSource = [[NSMutableDictionary alloc] init];
+        self.statusSource = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+}
+
+- (void)networkMonitorSpeed:(void(^)(float inStream, float outStream))scheduleBlock
 {
     static uint32_t i_vel = 0;
     static uint32_t o_vel = 0;
-    __weak typeof (self)weakSelf = self;
     
     //创建计时器
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(0, 0));
@@ -79,9 +89,7 @@
 //        NSLog(@"iBytes ~ %u oBytes ~ %u",iBytes,oBytes);
     
         dispatch_sync(dispatch_get_main_queue(), ^{
-            NSString *inStream = [weakSelf formatNetworkSpeed:iBytes - i_vel];
-            NSString *outStram = [weakSelf formatNetworkSpeed:oBytes - o_vel];
-            scheduleBlock(inStream, outStram);
+            scheduleBlock(iBytes - i_vel, oBytes - o_vel);
         });
         
         i_vel = iBytes;
@@ -204,6 +212,18 @@
 {
     pid_t access_pid = getpid();
     return access_pid;
+}
+
++ (CGFloat)getUptimeInMilliseconds
+{
+//    const int64_t kOneMillion = 1000 * 1000;
+    static mach_timebase_info_data_t s_timebase_info;
+
+    if (s_timebase_info.denom == 0) {
+        (void) mach_timebase_info(&s_timebase_info);
+    }
+
+    return (CGFloat)((mach_absolute_time() * s_timebase_info.numer) / s_timebase_info.denom)/NSEC_PER_SEC*1000;//毫秒
 }
 
 @end

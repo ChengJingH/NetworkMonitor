@@ -11,12 +11,21 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NetworkMonitor : NSObject
+/// 资源数据
+@property (nonatomic, strong)NSMutableDictionary *dataSource;
+/// 接口是否成功
+@property (nonatomic, strong)NSMutableDictionary *statusSource;
+/// 接口引用计数
+@property (nonatomic, strong)NSMutableDictionary *countSource;
 
 /// 创建实例化对象
 + (instancetype)shareInstance;
 
+/// 获取系统时间
++ (CGFloat)getUptimeInMilliseconds;
+
 /// 网速监听
-- (void)networkMonitorSpeed:(void(^)(NSString *inStream, NSString *outStream))scheduleBlock;
+- (void)networkMonitorSpeed:(void(^)(float inStream, float outStream))scheduleBlock;
 
 /// 网络类型监听
 - (void)networkTypeMonitor:(void(^)(NSString *networkType))networkTypeBlock;
